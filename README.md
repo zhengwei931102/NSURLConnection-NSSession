@@ -1,4 +1,8 @@
-# Session
+# 网络解析数据
+GET同步
+```
+[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+```
 NSSession 网络解析数据
 ```
     NSURLSession *session = [NSURLSession sharedSession];
