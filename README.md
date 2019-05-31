@@ -34,7 +34,7 @@ NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:
 //发送
 [task resume];
 ```
-NSSession代理 网络解析数据
+NSSession代理 网络解析数据，服从协议NSURLSessionDataDelegate
 ```
 NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
 NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
