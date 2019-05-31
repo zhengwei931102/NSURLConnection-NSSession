@@ -34,4 +34,22 @@ NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:
 //发送
 [task resume];
 ```
+NSSession代理 网络解析数据
+```
+NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+NSURLSessionTask *task =[session dataTaskWithRequest:request];
+self.mutableData = [NSMutableData data];
+[task resume];
 
+//代理
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data{
+    [self.mutableData appendData:data];
+}
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse * _Nullable))completionHandler{
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:self.mutableData options:0 error:nil];
+        
+        //重点，重新加载table
+        [self.table reloadData];
+}
+```
